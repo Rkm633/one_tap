@@ -11,17 +11,17 @@ services:
       - key: SERVER_TYPE
         value: http
 
-      # Render URL auto assign
+      # Default dummy value taaki Render deploy ke waqt ruk kar user se na maange
       - key: SERVER_URL
-        sync: false
+        value: "http://localhost:8080"
 
-      # Authentication
+      # Sabhi users ke liye fixed dashboard login password
       - key: AUTHENTICATION_TYPE
         value: apikey
       - key: AUTHENTICATION_API_KEY
         value: "Mykey123"
 
-      # Database: Local SQLite
+      # SQLite settings (No external database needed)
       - key: DATABASE_ENABLED
         value: "true"
       - key: DATABASE_PROVIDER
@@ -31,7 +31,7 @@ services:
       - key: DATABASE_SAVE_DATA_INSTANCE
         value: "true"
 
-      # Storage flags false
+      # Messages store nahi honge
       - key: DATABASE_SAVE_MESSAGE_HISTORIC
         value: "false"
       - key: DATABASE_SAVE_DATA_NEW_MESSAGE
@@ -45,7 +45,7 @@ services:
       - key: STORE_CONTACTS
         value: "false"
 
-      # Session & Manager Customization
+      # Manager customization
       - key: DEL_INSTANCE
         value: "false"
       - key: CONFIG_SESSION_PHONE_CLIENT
