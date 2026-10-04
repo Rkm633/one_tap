@@ -12,10 +12,16 @@ services:
       - key: WAHA_HTTP_PORT
         value: "8080"
 
-      # Authentication (Aapki aur users ki security ke liye)
+      # Lightweight engine (बिना क्रैश हुए चलने के लिए)
+      - key: WHATSAPP_DEFAULT_ENGINE
+        value: "NOWEB"
+
+      # API Security (वेबसाइट से मैसेज भेजने के लिए)
       - key: WAHA_API_KEY
         value: "Mykey123"
 
-      # Sabse zaroori: Lightweight engine (Bina heavy browser ke)
-      - key: WHATSAPP_DEFAULT_ENGINE
-        value: "NOWEB"
+      # Dashboard Security (लॉगिन पॉपअप को खोलने के लिए सटीक डिटेल्स)
+      - key: WAHA_DASHBOARD_USERNAME
+        value: "admin"
+      - key: WAHA_DASHBOARD_PASSWORD
+        value: "Mykey123"
