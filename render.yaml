@@ -11,18 +11,18 @@ services:
         value: "8080"
       - key: SERVER_TYPE
         value: http
-      
-      # URL Render dwara auto-assign ho jayega
+
+      # Render URL auto assign
       - key: SERVER_URL
         sync: false
 
-      # Authentication (Har user ke liye safe unique key generate hogi)
+      # Authentication: Fixed API Key jo sabhi users ke liye same password banegi
       - key: AUTHENTICATION_TYPE
         value: apikey
       - key: AUTHENTICATION_API_KEY
-        generateValue: true
+        value: "Mykey123"
 
-      # Database: Bina external DB ke local SQLite use karega
+      # Database: Bina external DB ke local SQLite
       - key: DATABASE_ENABLED
         value: "true"
       - key: DATABASE_PROVIDER
@@ -32,7 +32,7 @@ services:
       - key: DATABASE_SAVE_DATA_INSTANCE
         value: "true"
 
-      # No Message/Chat Storage (Data save nahi hoga)
+      # Storage flags false (Messages aur chats store nahi honge)
       - key: DATABASE_SAVE_MESSAGE_HISTORIC
         value: "false"
       - key: DATABASE_SAVE_DATA_NEW_MESSAGE
@@ -46,7 +46,7 @@ services:
       - key: STORE_CONTACTS
         value: "false"
 
-      # Session aur Manager Panel Settings
+      # Session aur Manager Panel Customization
       - key: DEL_INSTANCE
         value: "false"
       - key: CONFIG_SESSION_PHONE_CLIENT
