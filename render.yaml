@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: edutaai-whatsapp-service
+    name: edutaai-whatsapp-gateway
     runtime: image
     image:
       url: evolutionapi/evolution-api:latest
