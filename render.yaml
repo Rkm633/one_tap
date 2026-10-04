@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: edutaai-whatsapp-gateway
+    name: edutaai-whatsapp-service
     runtime: image
     image:
-      url: evolutionapi/evolution-api:latest
+      url: ghcr.io/evolutionapi/evolution-api:v2.1.2
     plan: free
     region: singapore
     envVars:
