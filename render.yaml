@@ -3,7 +3,8 @@ services:
     name: edutaai-whatsapp-service
     runtime: image
     image:
-      url: evolutionapi/evolution-api:latest
+      # Yahan sahi public image ka path lagaya gaya hai
+      url: atendai/evolution-api:latest
     plan: free
     region: singapore
     envVars:
@@ -12,7 +13,7 @@ services:
       - key: SERVER_TYPE
         value: http
 
-      # Render auto-prompt ko rokne ke liye default dummy URL
+      # Render auto-prompt ko rokne ke liye
       - key: SERVER_URL
         value: "http://localhost:8080"
 
@@ -22,7 +23,7 @@ services:
       - key: AUTHENTICATION_API_KEY
         value: "Mykey123"
 
-      # Local SQLite (Bina external database ke)
+      # Local SQLite 
       - key: DATABASE_ENABLED
         value: "true"
       - key: DATABASE_PROVIDER
@@ -32,7 +33,7 @@ services:
       - key: DATABASE_SAVE_DATA_INSTANCE
         value: "true"
 
-      # Storage completely disabled (Free tier ko crash hone se bachane ke liye)
+      # Storage completely disabled (RAM bachane ke liye)
       - key: DATABASE_SAVE_MESSAGE_HISTORIC
         value: "false"
       - key: DATABASE_SAVE_DATA_NEW_MESSAGE
