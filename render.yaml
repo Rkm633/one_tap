@@ -1,10 +1,9 @@
 services:
   - type: web
     name: edutaai-whatsapp-service
-    env: docker
-    repo: https://github.com/Rkm633/one_tap
-    branch: main
-    dockerfilePath: ./Dockerfile
+    runtime: image
+    image:
+      url: evolutionapi/evolution-api:latest
     plan: free
     region: singapore
     envVars:
@@ -13,17 +12,17 @@ services:
       - key: SERVER_TYPE
         value: http
 
-      # Default local server URL
+      # Render auto-prompt ko rokne ke liye default dummy URL
       - key: SERVER_URL
         value: "http://localhost:8080"
 
-      # Authentication
+      # Authentication (Sabhi users ke liye same password)
       - key: AUTHENTICATION_TYPE
         value: apikey
       - key: AUTHENTICATION_API_KEY
         value: "Mykey123"
 
-      # SQLite settings
+      # Local SQLite (Bina external database ke)
       - key: DATABASE_ENABLED
         value: "true"
       - key: DATABASE_PROVIDER
@@ -33,7 +32,7 @@ services:
       - key: DATABASE_SAVE_DATA_INSTANCE
         value: "true"
 
-      # No Storage
+      # Storage completely disabled (Free tier ko crash hone se bachane ke liye)
       - key: DATABASE_SAVE_MESSAGE_HISTORIC
         value: "false"
       - key: DATABASE_SAVE_DATA_NEW_MESSAGE
@@ -47,7 +46,7 @@ services:
       - key: STORE_CONTACTS
         value: "false"
 
-      # UI Customization
+      # Panel UI Customization
       - key: DEL_INSTANCE
         value: "false"
       - key: CONFIG_SESSION_PHONE_CLIENT
