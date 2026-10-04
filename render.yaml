@@ -1,43 +1,21 @@
 services:
   - type: web
-    name: edutaai-whatsapp-service
+    name: edutaai-whatsapp-gateway
     runtime: image
     image:
-      # V2 ki jagah V1 ka stable version, jo bina external database ke chalta hai
-      url: atendai/evolution-api:v1.8.2
+      url: devlikeapro/waha:latest
     plan: free
     region: singapore
     envVars:
-      - key: SERVER_PORT
+      - key: PORT
         value: "8080"
-      
-      # Render auto-prompt rokne ke liye
-      - key: SERVER_URL
-        value: "http://localhost:8080"
+      - key: WAHA_HTTP_PORT
+        value: "8080"
 
-      # Authentication
-      - key: AUTHENTICATION_TYPE
-        value: apikey
-      - key: AUTHENTICATION_API_KEY
+      # Authentication (Aapki aur users ki security ke liye)
+      - key: WAHA_API_KEY
         value: "Mykey123"
 
-      # V1 me 'local' provider bina kisi crash ke chalta hai
-      - key: DATABASE_ENABLED
-        value: "true"
-      - key: DATABASE_PROVIDER
-        value: "local"
-      - key: DATABASE_CONNECTION_URI
-        value: "/tmp/edutaai_sqlite.db"
-      - key: DATABASE_SAVE_DATA_INSTANCE
-        value: "true"
-
-      # Storage disable karne ke liye flags
-      - key: DATABASE_SAVE_DATA_NEW_MESSAGE
-        value: "false"
-      - key: DATABASE_SAVE_MESSAGE_HISTORIC
-        value: "false"
-
-      - key: DEL_INSTANCE
-        value: "false"
-      - key: CONFIG_SESSION_PHONE_CLIENT
-        value: "EdutaAI WhatsApp Gateway"
+      # Sabse zaroori: Lightweight engine (Bina heavy browser ke)
+      - key: WHATSAPP_DEFAULT_ENGINE
+        value: "NOWEB"
