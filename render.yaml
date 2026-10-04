@@ -3,8 +3,8 @@ services:
     name: edutaai-whatsapp-service
     runtime: image
     image:
-      # Yahan sahi public image ka path lagaya gaya hai
-      url: atendai/evolution-api:latest
+      # एकदम सही और लेटेस्ट Docker इमेज पाथ
+      url: evoapicloud/evolution-api:latest
     plan: free
     region: singapore
     envVars:
@@ -13,17 +13,17 @@ services:
       - key: SERVER_TYPE
         value: http
 
-      # Render auto-prompt ko rokne ke liye
+      # Render auto-prompt को रोकने के लिए
       - key: SERVER_URL
         value: "http://localhost:8080"
 
-      # Authentication (Sabhi users ke liye same password)
+      # Authentication (सभी यूज़र्स के लिए समान पासवर्ड)
       - key: AUTHENTICATION_TYPE
         value: apikey
       - key: AUTHENTICATION_API_KEY
         value: "Mykey123"
 
-      # Local SQLite 
+      # Local SQLite (बिना बाहरी डेटाबेस के)
       - key: DATABASE_ENABLED
         value: "true"
       - key: DATABASE_PROVIDER
@@ -33,7 +33,7 @@ services:
       - key: DATABASE_SAVE_DATA_INSTANCE
         value: "true"
 
-      # Storage completely disabled (RAM bachane ke liye)
+      # Storage completely disabled (RAM बचाने के लिए)
       - key: DATABASE_SAVE_MESSAGE_HISTORIC
         value: "false"
       - key: DATABASE_SAVE_DATA_NEW_MESSAGE
