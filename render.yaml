@@ -1,34 +1,57 @@
 services:
-  # 1. edutaai - मुख्य व्हाट्सएप एपीआई गेटवे (No External Database)
   - type: web
     name: edutaai-whatsapp-service
-    env: docker
-    plan: free # पूरी तरह मुफ़्त प्लान
-    region: singapore # सबसे तेज़ रीज़न
-    dockerCommand: ""
+    env: image
+    image:
+      url: atendai/evolution-api:v2.1.2
+    plan: free
+    region: singapore
     envVars:
-      # डेटाबेस इनेबल रखना है लेकिन उसे लोकल SQLite पर सेट करना है
+      - key: SERVER_PORT
+        value: "8080"
+      - key: SERVER_TYPE
+        value: http
+      
+      # URL Render dwara auto-assign ho jayega
+      - key: SERVER_URL
+        sync: false
+
+      # Authentication (Har user ke liye safe unique key generate hogi)
+      - key: AUTHENTICATION_TYPE
+        value: apikey
+      - key: AUTHENTICATION_API_KEY
+        generateValue: true
+
+      # Database: Bina external DB ke local SQLite use karega
       - key: DATABASE_ENABLED
         value: "true"
       - key: DATABASE_PROVIDER
-        value: "sqlite"
+        value: local
       - key: DATABASE_CONNECTION_URI
         value: "file:/tmp/edutaai_sqlite.db"
+      - key: DATABASE_SAVE_DATA_INSTANCE
+        value: "true"
 
-      # सुरक्षा के लिए आपका फिक्स्ड पासवर्ड
-      - key: AUTHENTICATION_TYPE
-        value: "apikey"
-      - key: AUTHENTICATION_API_KEY
-        value: "Mykey123"
-      
-      # व्हाट्सएप सेशन डेटा को अस्थायी फ़ोल्डर में रखना
-      - key: CONFIG_LOCAL_STORE_LOCATION
-        value: "/tmp"
-      - key: DEL_INSTANCE
+      # No Message/Chat Storage (Data save nahi hoga)
+      - key: DATABASE_SAVE_MESSAGE_HISTORIC
+        value: "false"
+      - key: DATABASE_SAVE_DATA_NEW_MESSAGE
+        value: "false"
+      - key: STORE_MESSAGES
+        value: "false"
+      - key: STORE_MESSAGE_UPDATING
+        value: "false"
+      - key: STORE_CHATS
+        value: "false"
+      - key: STORE_CONTACTS
         value: "false"
 
-      # आपके सॉफ़्टवेयर 'edutaai' की ब्रांडिंग सेटिंग्स
+      # Session aur Manager Panel Settings
+      - key: DEL_INSTANCE
+        value: "false"
+      - key: CONFIG_SESSION_PHONE_CLIENT
+        value: "EdutaAI WhatsApp Gateway"
       - key: CONFIG_VIEW_MANAGER_TITLE
-        value: "edutaai - WhatsApp Gateway"
+        value: "EdutaAI - WhatsApp Gateway"
       - key: CONFIG_VIEW_MANAGER_COLOR
-        value: "#075e54" # व्हाट्सएप ग्रीन थीम
+        value: "#075e54"
