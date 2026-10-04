@@ -1,11 +1,9 @@
 services:
   - type: web
     name: edutaai-whatsapp-service
-    # 'env: image' को बदलकर 'runtime: image' किया गया है
     runtime: image
     image:
-      # 'docker.io/' को हटाकर सही डायरेक्ट पाथ दिया गया है
-      url: evolutionapi/evolution-api:v2.1.2
+      url: evolutionapi/evolution-api:latest
     plan: free
     region: singapore
     envVars:
@@ -27,7 +25,6 @@ services:
       # Database: Local SQLite
       - key: DATABASE_ENABLED
         value: "true"
-      # 'local' को बदलकर सही कीवर्ड 'sqlite' किया गया है
       - key: DATABASE_PROVIDER
         value: "sqlite"
       - key: DATABASE_CONNECTION_URI
@@ -35,7 +32,7 @@ services:
       - key: DATABASE_SAVE_DATA_INSTANCE
         value: "true"
 
-      # Storage flags false (ताकि सर्वर पर रैम लोड न बढ़े)
+      # Storage flags false
       - key: DATABASE_SAVE_MESSAGE_HISTORIC
         value: "false"
       - key: DATABASE_SAVE_DATA_NEW_MESSAGE
