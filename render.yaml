@@ -3,45 +3,41 @@ services:
     name: edutaai-whatsapp-service
     runtime: image
     image:
-      url: evoapicloud/evolution-api:latest
+      # V2 ki jagah V1 ka stable version, jo bina external database ke chalta hai
+      url: atendai/evolution-api:v1.8.2
     plan: free
     region: singapore
     envVars:
       - key: SERVER_PORT
         value: "8080"
-      - key: SERVER_TYPE
-        value: http
-
+      
       # Render auto-prompt rokne ke liye
       - key: SERVER_URL
         value: "http://localhost:8080"
 
-      # Authentication (Sabhi users ke liye same password)
+      # Authentication
       - key: AUTHENTICATION_TYPE
         value: apikey
       - key: AUTHENTICATION_API_KEY
         value: "Mykey123"
 
-      # Database Completely Disabled (Ye error fix karega)
+      # V1 me 'local' provider bina kisi crash ke chalta hai
       - key: DATABASE_ENABLED
+        value: "true"
+      - key: DATABASE_PROVIDER
+        value: "local"
+      - key: DATABASE_CONNECTION_URI
+        value: "/tmp/edutaai_sqlite.db"
+      - key: DATABASE_SAVE_DATA_INSTANCE
+        value: "true"
+
+      # Storage disable karne ke liye flags
+      - key: DATABASE_SAVE_DATA_NEW_MESSAGE
+        value: "false"
+      - key: DATABASE_SAVE_MESSAGE_HISTORIC
         value: "false"
 
-      # Storage completely disabled (RAM bachane ke liye)
-      - key: STORE_MESSAGES
-        value: "false"
-      - key: STORE_MESSAGE_UPDATING
-        value: "false"
-      - key: STORE_CHATS
-        value: "false"
-      - key: STORE_CONTACTS
-        value: "false"
-
-      # Panel UI Customization
       - key: DEL_INSTANCE
         value: "false"
       - key: CONFIG_SESSION_PHONE_CLIENT
         value: "EdutaAI WhatsApp Gateway"
-      - key: CONFIG_VIEW_MANAGER_TITLE
-        value: "EdutaAI - WhatsApp Gateway"
-      - key: CONFIG_VIEW_MANAGER_COLOR
-        value: "#075e54"
